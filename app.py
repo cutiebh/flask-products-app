@@ -8,7 +8,7 @@ def home():
     return """
     <html>
         <head>
-            <title>Flask Products App</title>
+            <title>Cutie's Products App</title>
         </head>
         <body style="font-family: Arial; margin: 40px;">
             <h1>Welcome to Cutie's Products App</h1>
