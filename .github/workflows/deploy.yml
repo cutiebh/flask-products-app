@@ -69,7 +69,11 @@ jobs:
       run: |
         ssh -i ~/.ssh/ec2key.pem -o StrictHostKeyChecking=no \
         ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
-        "cd ${{ secrets.EC2_PATH }} && pip3 install -r requirements.txt --user"
+        "
+        cd ${{ secrets.EC2_PATH }} &&
+        python3 -m venv venv &&
+        venv/bin/pip install --upgrade pip &&
+        venv/bin/pip install -r requirements.txt"
 
     - name: Restart Flask Systemd Service
       run: |
