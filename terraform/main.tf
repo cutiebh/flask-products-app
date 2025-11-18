@@ -1,7 +1,3 @@
-#############################################
-# Terraform minimal EC2 + Flask deployment
-#############################################
-
 terraform {
   required_providers {
     aws = {
@@ -15,9 +11,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-###########################
-# Security Group
-###########################
 resource "aws_security_group" "flask_sg" {
   name        = "flask-sg"
   description = "Allow SSH and HTTP"
@@ -46,46 +39,36 @@ resource "aws_security_group" "flask_sg" {
   }
 }
 
-###########################
-# EC2 Instance
-###########################
 resource "aws_instance" "flask_app" {
   ami           = var.ami_id
   instance_type = "t3.micro"
   key_name      = var.key_name
 
-  vpc_security_group_ids = [
-    aws_security_group.flask_sg.id
-  ]
+  vpc_security_group_ids = [aws_security_group.flask_sg.id]
 
-  ##########################################
-  # SAFE user_data (fixed)
-  ##########################################
   user_data = <<EOF
 #!/bin/bash
 set -xe
 
-apt update -y
-apt install -y python3-venv
-apt install -y python3 python3-pip git python3-venv
+# Log user_data start
+echo "*** START USER DATA ***" >> /var/log/user-data.log
 
-# Create app folder
+apt update -y
+apt install -y python3 python3-pip python3-venv git
+
 mkdir -p /var/www/flaskapp
 chown ubuntu:ubuntu /var/www/flaskapp
 
-# Install gunicorn system-wide
-pip3 install flask gunicorn
-
-# Create systemd service
+# Create systemd service pointing to venv gunicorn
 cat >/etc/systemd/system/flaskapp.service <<EOL
 [Unit]
-Description=Gunicorn Service for Minimal Flask App
+Description=Gunicorn service for Minimal Flask App
 After=network.target
 
 [Service]
 User=ubuntu
 WorkingDirectory=/var/www/flaskapp
-ExecStart=/usr/bin/gunicorn --bind 0.0.0.0:8000 app:app
+ExecStart=/var/www/flaskapp/venv/bin/gunicorn --bind 0.0.0.0:8000 app:app
 Restart=always
 
 [Install]
@@ -94,6 +77,8 @@ EOL
 
 systemctl daemon-reload
 systemctl enable flaskapp.service
+
+echo "*** END USER DATA ***" >> /var/log/user-data.log
 EOF
 
   tags = {
@@ -101,9 +86,6 @@ EOF
   }
 }
 
-###########################
-# Output public IP
-###########################
 output "ec2_public_ip" {
   value = aws_instance.flask_app.public_ip
 }
