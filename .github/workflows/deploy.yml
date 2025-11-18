@@ -36,7 +36,7 @@ jobs:
         pytest tests/test_integration_app.py -q
 
     - name: Upload Artifact for Deployment
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-package
         path: |
@@ -50,7 +50,7 @@ jobs:
 
     steps:
     - name: Download Artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: app-package
 
