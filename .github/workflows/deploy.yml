@@ -83,3 +83,9 @@ jobs:
 
     - name: Deployment Complete
       run: echo "Deployment successful!"
+    
+    - name: Show Web App URL
+      run: |
+        echo "The app is available at:"
+        echo "http://${{ secrets.EC2_HOST }}:8000/"
+
