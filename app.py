@@ -23,7 +23,7 @@ def home():
 @app.route("/api/info")
 def info():
     return {
-        "service": "Flask Products App",
+        "service": "Cutie's Products App",
         "status": "running"
     }
 
