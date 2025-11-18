@@ -1,0 +1,83 @@
+########################################
+# Python
+########################################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.pyd
+*.sqlite3
+*.db
+
+########################################
+# Virtual Environments
+########################################
+env/
+venv/
+ENV/
+.venv/
+
+########################################
+# Pytest / Coverage
+########################################
+.cache/
+.coverage
+coverage.xml
+htmlcov/
+
+########################################
+# IDE / Editor Files
+########################################
+.vscode/
+.idea/
+*.swp
+*.swo
+
+########################################
+# OS Files
+########################################
+.DS_Store
+Thumbs.db
+
+########################################
+# GitHub Actions artifacts
+########################################
+*.log
+*.temp
+
+########################################
+# Terraform
+########################################
+terraform/.terraform/
+terraform/.terraform.lock.hcl
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/terraform.tfvars
+terraform/*.tfvars.json
+
+# Crash logs
+terraform/crash.log
+terraform/*.backup
+terraform/*.tfplan
+
+########################################
+# SSH keys (never commit!)
+########################################
+*.pem
+*.key
+*.pub
+
+########################################
+# Deployment / Build artifacts
+########################################
+dist/
+build/
+*.egg-info/
+
+########################################
+# Python package cache
+########################################
+*.egg
+*.whl
+pip-wheel-metadata/
