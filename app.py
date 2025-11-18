@@ -12,7 +12,10 @@ def home():
         </head>
         <body style="font-family: Arial; margin: 40px;">
             <h1>Welcome to Cutie's Products App</h1>
-            <p>This server is running on AWS EC2 instance and deployed automatically using Terraform & GitHub Actions.</p>
+            <p>
+                This server is running on AWS EC2 instance and deployed automatically 
+                using Terraform & GitHub Actions.
+            </p>
             <hr>
             <p>Status: <strong>Online</strong></p>
         </body>
