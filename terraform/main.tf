@@ -66,7 +66,8 @@ resource "aws_instance" "flask_app" {
 set -xe
 
 apt update -y
-apt install -y python3 python3-pip git
+apt install -y python3-venv
+apt install -y python3 python3-pip git python3-venv
 
 # Create app folder
 mkdir -p /var/www/flaskapp
