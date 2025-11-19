@@ -1,4 +1,4 @@
-# Products App designed using Python flask.
+#  Products App designed using Python flask.
 # Terraform is used to create an AWS EC2 instance.
 # CI/CD pipeline is implemented using GitHub Actions.
 
